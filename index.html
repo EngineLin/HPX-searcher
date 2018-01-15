@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>PHX 讀書會小組資料分析</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/css/bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.2/d3.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+
+      <div id="header" class="row bg-success">
+        <div id="title-col" class="col flex-center pt-5 pb-5">
+          <h1>HPX 小組資料櫃</h1>
+        </div>
+      </div>
+      <div id="btn-navbar" class="row bg-success">
+        <div id="btn-navbar-col" class="col flex-center justify-content-end">
+          <!-- <div class="btn btn-warning m-2" @click="toggleData()">分組統計</div>
+          <div class="btn btn-primary m-2">分組資料</div> -->
+        </div>
+      </div>
+
+      <div class="row justify-content-center mt-4 mb-4">
+        <div id="search-col" class="col-md-4">
+            <form class="search-form">
+              <div class="form-group">
+                <label for="search" class="sr-only">Search</label>
+                <input type="text" class="form-control" name="search" id="search" placeholder="Search" @keyup="filter($event)">
+                <span class="form-control-feedback"></span>
+              </div>
+            </form>
+        </div>
+      </div>
+
+      <!-- <div class="row justify-content-center" v-show="isShowData">
+        <svg id="chart" class="border mb-4"></svg>
+      </div> -->
+
+      <div class="row">
+        <div class="col-12 col-md-6 mb-2 mt-2" v-for="gloup in jsonData">
+          <div class="row bg-warning mr-1 ml-1 pt-2 rounded-top">
+            <div class="col-12 col-md-3">小組名稱：</div>
+            <div class="col-12 col-md-9 text-danger text-center">{{ gloup['小組名稱'] || '無資料' }}</div>
+          </div>
+          <div class="row bg-warning mr-1 ml-1 pb-2">
+            <div class="col-12 col-md-3">進行書名：</div>
+            <div class="col-12 col-md-9 text-center">{{ gloup['進行書名'] || '無資料' }}</div>
+          </div>
+          <div class="row bg-secondary mr-1 ml-1">
+            <div class="col-12 col-md-3">組長：</div>
+            <div class="col-12 col-md-9 text-center" style="font-weight: bold">{{ gloup['召集人/FB管理/組長'] || '無資料' }}</div>
+          </div>
+          <div class="row bg-secondary mr-1 ml-1">
+            <div class="col-12 col-md-3">宣傳/通告：</div>
+            <div class="col-12 col-md-9 text-center">{{ gloup['宣傳/通告'] || '無資料' }}</div>
+          </div>
+          <div class="row bg-secondary mr-1 ml-1">
+            <div class="col-12 col-md-3">小組集會日：</div>
+            <div class="col-12 col-md-9 text-center">{{ gloup['小組集會日'] || '無資料' }}</div>
+          </div>
+          <div class="row bg-secondary mr-1 ml-1">
+            <div class="col-12 col-md-3 text-light">集會頻率：</div>
+            <div class="col-12 col-md-9 text-light text-center">{{ gloup['集會頻率'] || '無資料' }}</div>
+          </div>
+          <div class="row bg-secondary mr-1 ml-1">
+            <div class="col-12 col-md-3">狀態：</div>
+            <div class="col-12 col-md-9 text-center">{{ gloup['狀態'] || '無資料' }}</div>
+          </div>
+
+          <!-- v-if -->
+          <div class="row bg-secondary mr-1 ml-1 rounded-bottom" v-if="gloup['FB社團'].indexOf('http') === -1">
+            <div class="col-12 col-md-3">FB社團：</div>
+            <div class="col-12 col-md-9 text-center">{{ gloup['FB社團'] || '無資料' }}</div>
+          </div>
+          <!-- v-else -->
+          <a :href="gloup['FB社團']" class="fb-link row bg-info mr-1 ml-1 rounded-bottom" v-else>
+            <div class="col-12 text-center text-dark text-center flex-center">FB社團連結</div>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

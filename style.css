@@ -1,0 +1,24 @@
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gloup-card {
+  width: 100%;
+}
+
+.fb-link {
+  height: 30px;
+}
+
+@media(max-width: 767px) {
+  .fb-link {
+    height: 60px;
+  }
+}
+
+.fb-link:hover {
+  cursor: pointer;
+}
+
